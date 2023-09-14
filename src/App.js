@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import Students from "./components/Students";
 
-import { useState } from "react";
+import UserProvider, { UserContext } from './contexts/user';
 
 function App() {
-  const [studentName, setStudentName] = useState('Simon');
+  const { students } = useContext(UserContext);
 
   return (
-    <div className="App">
-      <h1>Escola</h1>
-      <hr />
+    <UserProvider value={{ students }}>
+      <>
+        <Title>
+          <h1>Escola</h1>
+          <strong>Bem vindo a escola!!!</strong>
+        </Title>
+        <hr />
 
-      <Students name={studentName} changeName={setStudentName}/>
-    </div>
+        <Students />
+      </>
+    </UserProvider>
   );
 }
 
 export default App;
+
+function Title({ children }) {
+  return(
+      <>
+        { children }
+      </>
+  )
+}

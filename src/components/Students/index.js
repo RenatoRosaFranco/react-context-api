@@ -1,13 +1,26 @@
+import {useContext} from "react";
+import { UserContext } from '../../contexts/user';
 import Name from "../Name";
 
-const Students = (props) => {
-	let { name, changeName } = props;
+const Students = () => {
+
+	const {
+		students,
+		studentsQtd,
+		setStudentsQtd
+	} = useContext(UserContext);
 
 	return(
 		<>
 			<h1>Alunos</h1>
+			<p>Nome do Aluno online: {students}</p>
+			<p>Students quantity {studentsQtd}</p>
 
-			<Name name={name} changeName={changeName}/>
+			<button onClick={ () => { setStudentsQtd(studentsQtd + 1) } }>
+				Aumentar numero de Alunos
+			</button>
+
+			<Name />
 		</>
 	)
 }
